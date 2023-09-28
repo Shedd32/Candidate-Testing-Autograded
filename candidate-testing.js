@@ -5,7 +5,7 @@ const input = require('readline-sync');
 // TODO 1.1a: Define candidateName // 
 let candidateName = "";
 // TODO 1.2a: Define question, correctAnswer, and candidateAnswer //
-let question = ("Who was the first American woman in space? ");
+let question = "Who was the first American woman in space? ";
 let correctAnswer = "Sally Ride";
 let candidateAnswer = "";
 
@@ -15,33 +15,43 @@ let questions= ["Who was the first American woman in space? ", "True or false: 5
 let correctAnswers= ["Sally Ride" , "true" , "40" , "Trajectory" , "3"];  
 let candidateAnswers= [];
 
-
 function askForName() {
   // TODO 1.1b: Ask for candidate's name //
-const candidateName = input.question("What is your name? ")
+candidateName = input.question("What is your name? ")
 
 }
 
 function askQuestion() {
   // TODO 1.2b: Ask candidate the question and assign the response as candidateAnswer //
-for (i=0; i <= questions.length; i++){
-  let candidateAnswers = input.question[i]
+for (let i = 0; i < questions.length; i ++) {
+ 
+  candidateAnswers = input.question(questions[i]);
+
 }
 }
 
 function gradeQuiz(candidateAnswers) {
+ let numCorrect = 0;
+  for (let i = 0; i < candidateAnswers.length; i ++){
 
+    if (candidateAnswers[i].toLowerCase() === correctAnswers[i].toLowerCase()){
+        numCorrect ++ 
+
+    }
+    
+  }
   // TODO 1.2c: Let the candidate know if they have answered the question correctly or incorrectly // 
-if (candidateAnswers == correctAnswers){
-console.log("Correct. Great Job!")
-}
-else {
-console.log("Sorry that is incorrect")
-}
+ console.log(`You answered ${candidateAnswers} , and the correct answers are ${correctAnswers}.`)
 
 
-  let grade;  //TODO 3.2 use this variable to calculate the candidates score.
-
+  let grade = ( numCorrect / questions.length * 100);  //TODO 3.2 use this variable to calculate the candidates score.
+ 
+  if (grade >= 80){
+  console.log("Congratulations, you have met the requirments to pass your candidate testing!")
+ } 
+  else {
+  console.log("Sorry, you have not met the requirements to pass your candidate testing.")
+ }
 
   return grade;
 }
